@@ -1,0 +1,2 @@
+export const image =
+  "https://orange-voluntary-pinniped-56.mypinata.cloud/ipfs/QmNi6drRPxQCjE6VMkEwQvWVPG4BVjaWYFe7nRcMBVjp76?pinataGatewayToken=vqAiuKCbNl2UjHNgv3JMlNQ0INFsyraKQaW9H5bigJBYY_MKgotaHDXlG8AYfsSA&_gl=1*z7b37q*_ga*MTY4NzYzMDQzOS4xNjk2NDI0Mzkz*_ga_5RMPXG14TE*MTY5NjY3NjYzMi4xNS4xLjE2OTY2NzY2MzUuNTcuMC4w";

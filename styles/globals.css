@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-image: linear-gradient(
+    to right top,
+    #2d0036,
+    #4f015b,
+    #730283,
+    #9a02ac,
+    #c400d7
+  );
+
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.background {
+  background-color: #644df6;
+}
+
+.backgroundMain {
+  background-color: #1a1a1a;
+}
+
+.newColor {
+  color: #1a1a1a;
+}
+
+.coverLine {
+  width: 100%;
+  height: 2rem;
+  background-color: #fff;
+  position: absolute;
+  bottom: -1.9rem;
+  z-index: 3;
+}
