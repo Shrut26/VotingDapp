@@ -47,7 +47,7 @@ const candidateRegistration = () => {
 
   return (
     <div className={Style.createVoter}>
-      <div>
+      {/* <div>
         {fileUrl && (
           <div className={Style.voterInfo}>
             <img src={fileUrl} alt="candidate_image" height={100} width={100} />
@@ -89,7 +89,10 @@ const candidateRegistration = () => {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
+
+      {/* commented out 50-92 */}
+
       <div className={Style.voter}>
         <div className={Style.voter_container}>
           <h1>Create new Candidate</h1>
@@ -101,9 +104,10 @@ const candidateRegistration = () => {
                   <p>Upload file : JPG, PNG</p>
                   <div className={Style.voter_container_box_div_image}>
                     <Image src="" alt="photo" />
-                    <p>Drag & Drop File</p>
-                    <p>or Browse media on device</p>
                   </div>
+                  {/* removed drag, drop and browse media from the voter_container_box_div_image class to voter_container_box_div_info*/}
+                  <p>Drag & Drop File</p>
+                  <p>or Browse media on device</p>
                 </div>
               </div>
             </div>

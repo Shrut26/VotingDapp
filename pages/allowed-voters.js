@@ -46,7 +46,7 @@ const allowedVoters = () => {
 
   return (
     <div className={Style.createVoter}>
-      <div>
+      {/* <div>
         {fileUrl && (
           <div className={Style.voterInfo}>
             <img src={fileUrl} alt="voter_image" height={100} width={100} />
@@ -84,7 +84,9 @@ const allowedVoters = () => {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
+      {/* commented out 49-87 */}
+      
       <div className={Style.voter}>
         <div className={Style.voter_container}>
           <h1>Create new voter</h1>
@@ -96,9 +98,10 @@ const allowedVoters = () => {
                   <p>Upload file : JPG, PNG</p>
                   <div className={Style.voter_container_box_div_image}>
                     <Image src="" alt="photo" />
-                    <p>Drag & Drop File</p>
-                    <p>or Browse media on device</p>
                   </div>
+                  {/* minor changes here */}
+                  <p>Drag & Drop File</p>
+                  <p>or Browse media on device</p>
                 </div>
               </div>
             </div>

@@ -2,8 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
-  "/allowed-voters": "pages/allowed-voters.js",
   "/voterList": "pages/voterList.js",
-  "/candidate-registration": "pages/candidate-registration.js"
+  "/candidate-registration": "pages/candidate-registration.js",
+  "/allowed-voters": "pages/allowed-voters.js",
+  "/": "pages/index.js"
 }

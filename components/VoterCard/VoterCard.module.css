@@ -1,0 +1,43 @@
+.card_box {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+  padding-right: 20px;
+}
+
+.image {
+  margin-right: 20px;
+}
+
+.card_info {
+  flex: 1;
+}
+
+.card_info h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card_info p {
+  margin: 0;
+}
+
+.vote_status {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.card {
+  display: flex;
+}
+
+.column {
+  flex: 1;
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    flex-direction: column;
+  }
+}

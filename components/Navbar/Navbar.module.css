@@ -1,1 +1,75 @@
- 
+.nabar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px 20px;
+  }
+  
+  .connect {
+    /* margin-top: 0; */
+    float: right;
+    margin-top: 10px;
+  }
+
+  .connect_flex {
+    display: flex;
+    align-items: center;
+  }
+
+  .connect_flex button {
+    background-color: #222222;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 4px;
+  }
+  
+  .connect_flex button:hover {
+    background-color: #333333;
+  }
+
+  .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: static;
+    top: auto;
+    left: auto;
+    width: auto;
+    /* background-color: transparent; */
+    margin-top: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  .navigation p {
+    margin: 0;
+    padding: 10px 15px;
+    /* font-size: 14px; */
+  }
+  
+  .navigation a {
+    margin: 0 10px;
+    color: #222222;
+  }
+
+  .navigation a:hover {
+    color: rgb(175, 196, 219);
+  }
+
+  .navigation p:hover {
+    color: #8f4545;
+  }
+
+  /* .openNav {
+    display: block;
+  } */
+
+  .message_box {
+    background-color: #be6d6d;
+  }
+
+  .message {
+    background-color: rgb(147, 101, 40);
+  }

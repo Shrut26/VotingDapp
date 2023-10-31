@@ -3,30 +3,10 @@
 @tailwind utilities;
 
 body {
-  background-image: linear-gradient(
-    to right top,
-    #2d0036,
-    #4f015b,
-    #730283,
-    #9a02ac,
-    #c400d7
-  );
-
+  background-color: #f7fafc; /* changed background color */
   height: 100vh;
   width: 100vw;
-  overflow: hidden;
-}
-
-.background {
-  background-color: #644df6;
-}
-
-.backgroundMain {
-  background-color: #1a1a1a;
-}
-
-.newColor {
-  color: #1a1a1a;
+  overflow: auto;
 }
 
 .coverLine {

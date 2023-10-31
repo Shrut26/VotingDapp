@@ -1,16 +1,14 @@
 .Button {
   margin-block: 2rem;
-  background-color: transparent;
-  border: 1px dotted #9a02ac;
+  background-color: #9a02ac; /* changed button background color */
+  border: none; /* removed button border */
   padding: 0.5rem 1rem;
-  color: #9a02ac;
+  color: #fff; /* changed button text color */
   border-radius: 1rem;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.4s ease-in-out;
+  font-weight: bold; /* changed button font weight */
 }
 
 .Button:hover {
-  background-color: #9a02ac;
-  color: #231e39;
+  background-color: #231e39; /* changed button hover background color */
 }
