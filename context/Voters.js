@@ -8,6 +8,74 @@ import { VotingAddress, VotingAddressABI } from "./constants";
 import { uploadFileToIPFS, uploadJSONToIPFS } from "./pinata";
 import { GetIpfsUrlFromPinata } from "./utils";
 
+import cv from "@techstark/opencv-js";
+
+// Define a function to load and process an image
+function loadImageAndProcess(fileURL) {
+  // Load the image from the fileURL and convert to grayscale
+  
+  console.log(fileURL);
+  // let img = cv.imread(fileURL);
+  cv.imread(fileURL);
+  // let gray_img = new cv.Mat();
+  // cv.cvtColor(img, gray_img, cv.COLOR_BGR2GRAY);
+
+  // // Create a SIFT object and detect keypoints and descriptors
+  // let sift = new cv.SIFT();
+  // let kp_img = new cv.KeyPointVector();
+  // let des_img = new cv.Mat();
+  // sift.detectAndCompute(gray_img, new cv.Mat(), kp_img, des_img);
+
+  // // Return the image, keypoints, and descriptors
+  // return [img, kp_img, des_img];
+}
+
+// Define a function to verify the face using SIFT features
+function verifyFace(fileURL, threshold) {
+  // Load and process the image from the fileURL
+  let cap = new cv.VideoCapture(0);
+  loadImageAndProcess(fileURL);
+  // let [img, kp_img, des_img] = loadImageAndProcess(fileURL);
+  // console.log(img);
+
+  // // Open the camera and capture a frame
+  // let cap = new cv.VideoCapture(0);
+  // let frame = new cv.Mat();
+  // cap.read(frame);
+
+  // // Convert the frame to grayscale and detect keypoints and descriptors
+  // let gray_frame = new cv.Mat();
+  // cv.cvtColor(frame, gray_frame, cv.COLOR_BGR2GRAY);
+  // let kp_frame = new cv.KeyPointVector();
+  // let des_frame = new cv.Mat();
+  // sift.detectAndCompute(gray_frame, new cv.Mat(), kp_frame, des_frame);
+
+  // // Match the descriptors using Brute Force Matcher and sort by distance
+  // let bf = new cv.BFMatcher(cv.NORM_L1, true);
+  // let matches = new cv.DMatchVector();
+  // bf.match(des_img, des_frame, matches);
+  // matches.sort((a, b) => a.distance - b.distance);
+
+  // // Draw the matched keypoints and display the result
+  // let matching_result = new cv.Mat();
+  // cv.drawMatches(img, kp_img, frame, kp_frame, matches, matching_result);
+  // cv.imshow("Matching Result", matching_result);
+
+  // // Calculate the ratio of matches to keypoints and compare with threshold
+  // let ratio = matches.size() / kp_img.size();
+  // if (ratio >= threshold) {
+  //   console.log("Face verified");
+  // } else {
+  //   console.log("Face not verified");
+  // }
+
+  // // Release the camera and close the windows
+  // cap.release();
+  // cv.destroyAllWindows();
+}
+
+// verifyFace("https://ipfs.io/ipfs/QmQCutTj8gCnHfQ64mBcRu1b2DAuxgKXYoUrgwmJPhXkvB", 0.7);
+
 export const fetchContract = (signerOrProvider) =>
   new ethers.Contract(VotingAddress, VotingAddressABI, signerOrProvider);
 
@@ -140,6 +208,7 @@ export const VotingProvider = ({ children }) => {
         ipfsUrl
       );
       await candidate.wait();
+      // verifyFace(fileURL, 0.7);
 
       console.log(candidate);
       router.push("/");

@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import Navbar from "../components/Navbar/Navbar";
 import { VotingProvider } from "../context/Voters";
+import TestPage from "./TestPage";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -10,5 +11,8 @@ export default function App({ Component, pageProps }) {
         <Component {...pageProps} />
       </div>
     </VotingProvider>
+    // <div className="App">
+    //   <TestPage />
+    // </div>
   );
 }

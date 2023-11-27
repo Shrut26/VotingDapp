@@ -1,1 +1,487 @@
-{"address":"0xF89Ff4957987d4606d43e207dFf8F4326C54BAe1","abi":[{"type":"constructor","payable":false,"inputs":[]},{"type":"event","anonymous":false,"name":"CandidateCreate","inputs":[{"type":"uint256","name":"candidateId","indexed":true},{"type":"string","name":"name","indexed":false},{"type":"string","name":"age","indexed":false},{"type":"string","name":"image","indexed":false},{"type":"uint256","name":"voterCount","indexed":false},{"type":"address","name":"_address","indexed":false},{"type":"string","name":"ipfs","indexed":false}]},{"type":"event","anonymous":false,"name":"VoterCreate","inputs":[{"type":"uint256","name":"voterId","indexed":true},{"type":"string","name":"voter_name","indexed":false},{"type":"string","name":"voter_image","indexed":false},{"type":"address","name":"voter_address","indexed":false},{"type":"uint256","name":"voter_allowed","indexed":false},{"type":"bool","name":"voter_voted","indexed":false},{"type":"uint256","name":"voterVote","indexed":false},{"type":"string","name":"voter_ipfs","indexed":false}]},{"type":"function","name":"_candidateId","constant":true,"stateMutability":"view","payable":false,"inputs":[],"outputs":[{"type":"uint256","name":"_value"}]},{"type":"function","name":"_voterId","constant":true,"stateMutability":"view","payable":false,"inputs":[],"outputs":[{"type":"uint256","name":"_value"}]},{"type":"function","name":"candidateAddress","constant":true,"stateMutability":"view","payable":false,"inputs":[{"type":"uint256"}],"outputs":[{"type":"address"}]},{"type":"function","name":"candidates","constant":true,"stateMutability":"view","payable":false,"inputs":[{"type":"address"}],"outputs":[{"type":"uint256","name":"candidateId"},{"type":"string","name":"name"},{"type":"string","name":"age"},{"type":"string","name":"image"},{"type":"uint256","name":"voterCount"},{"type":"address","name":"_address"},{"type":"string","name":"ipfs"}]},{"type":"function","name":"getCandidateData","constant":true,"stateMutability":"view","payable":false,"inputs":[{"type":"address","name":"_address"}],"outputs":[{"type":"string"},{"type":"string"},{"type":"uint256"},{"type":"string"},{"type":"uint256"},{"type":"string"},{"type":"address"}]},{"type":"function","name":"getCandidateLength","constant":true,"stateMutability":"view","payable":false,"inputs":[],"outputs":[{"type":"uint256"}]},{"type":"function","name":"getCandidates","constant":true,"stateMutability":"view","payable":false,"inputs":[],"outputs":[{"type":"address[]"}]},{"type":"function","name":"getVotedVoterList","constant":true,"stateMutability":"view","payable":false,"inputs":[],"outputs":[{"type":"address[]"}]},{"type":"function","name":"getVoterData","constant":true,"stateMutability":"view","payable":false,"inputs":[{"type":"address","name":"_address"}],"outputs":[{"type":"uint256"},{"type":"string"},{"type":"string"},{"type":"address"},{"type":"string"},{"type":"uint256"},{"type":"bool"}]},{"type":"function","name":"getVoterLength","constant":true,"stateMutability":"view","payable":false,"inputs":[],"outputs":[{"type":"uint256"}]},{"type":"function","name":"getVoterList","constant":true,"stateMutability":"view","payable":false,"inputs":[],"outputs":[{"type":"address[]"}]},{"type":"function","name":"setCandidate","constant":false,"payable":false,"inputs":[{"type":"address","name":"_address"},{"type":"string","name":"_age"},{"type":"string","name":"_name"},{"type":"string","name":"_image"},{"type":"string","name":"_ipfs"}],"outputs":[]},{"type":"function","name":"vote","constant":false,"payable":false,"inputs":[{"type":"address","name":"_candidateAddress"},{"type":"uint256","name":"_candidateVoteId"}],"outputs":[]},{"type":"function","name":"votedVoters","constant":true,"stateMutability":"view","payable":false,"inputs":[{"type":"uint256"}],"outputs":[{"type":"address"}]},{"type":"function","name":"voterRight","constant":false,"payable":false,"inputs":[{"type":"address","name":"_address"},{"type":"string","name":"_name"},{"type":"string","name":"_image"},{"type":"string","name":"_ipfs"}],"outputs":[]},{"type":"function","name":"voters","constant":true,"stateMutability":"view","payable":false,"inputs":[{"type":"address"}],"outputs":[{"type":"uint256","name":"voterId"},{"type":"string","name":"voter_name"},{"type":"string","name":"voter_image"},{"type":"address","name":"voter_address"},{"type":"uint256","name":"voter_allowed"},{"type":"bool","name":"voter_voted"},{"type":"uint256","name":"voterVote"},{"type":"string","name":"voter_ipfs"}]},{"type":"function","name":"votersAddress","constant":true,"stateMutability":"view","payable":false,"inputs":[{"type":"uint256"}],"outputs":[{"type":"address"}]},{"type":"function","name":"votingOrganiser","constant":true,"stateMutability":"view","payable":false,"inputs":[],"outputs":[{"type":"address"}]}]}
+{
+    "address": "0xF89Ff4957987d4606d43e207dFf8F4326C54BAe1",
+    "abi": [
+        {
+            "type": "constructor",
+            "payable": false,
+            "inputs": []
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "CandidateCreate",
+            "inputs": [
+                {
+                    "type": "uint256",
+                    "name": "candidateId",
+                    "indexed": true
+                },
+                {
+                    "type": "string",
+                    "name": "name",
+                    "indexed": false
+                },
+                {
+                    "type": "string",
+                    "name": "age",
+                    "indexed": false
+                },
+                {
+                    "type": "string",
+                    "name": "image",
+                    "indexed": false
+                },
+                {
+                    "type": "uint256",
+                    "name": "voterCount",
+                    "indexed": false
+                },
+                {
+                    "type": "address",
+                    "name": "_address",
+                    "indexed": false
+                },
+                {
+                    "type": "string",
+                    "name": "ipfs",
+                    "indexed": false
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "anonymous": false,
+            "name": "VoterCreate",
+            "inputs": [
+                {
+                    "type": "uint256",
+                    "name": "voterId",
+                    "indexed": true
+                },
+                {
+                    "type": "string",
+                    "name": "voter_name",
+                    "indexed": false
+                },
+                {
+                    "type": "string",
+                    "name": "voter_image",
+                    "indexed": false
+                },
+                {
+                    "type": "address",
+                    "name": "voter_address",
+                    "indexed": false
+                },
+                {
+                    "type": "uint256",
+                    "name": "voter_allowed",
+                    "indexed": false
+                },
+                {
+                    "type": "bool",
+                    "name": "voter_voted",
+                    "indexed": false
+                },
+                {
+                    "type": "uint256",
+                    "name": "voterVote",
+                    "indexed": false
+                },
+                {
+                    "type": "string",
+                    "name": "voter_ipfs",
+                    "indexed": false
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "_candidateId",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "uint256",
+                    "name": "_value"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "_voterId",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "uint256",
+                    "name": "_value"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "candidateAddress",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "address"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "candidates",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "uint256",
+                    "name": "candidateId"
+                },
+                {
+                    "type": "string",
+                    "name": "name"
+                },
+                {
+                    "type": "string",
+                    "name": "age"
+                },
+                {
+                    "type": "string",
+                    "name": "image"
+                },
+                {
+                    "type": "uint256",
+                    "name": "voterCount"
+                },
+                {
+                    "type": "address",
+                    "name": "_address"
+                },
+                {
+                    "type": "string",
+                    "name": "ipfs"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getCandidateData",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "_address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "uint256"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "uint256"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "address"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getCandidateLength",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "uint256"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getCandidates",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "address[]"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getVotedVoterList",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "address[]"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getVoterData",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "_address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "uint256"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "address"
+                },
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "uint256"
+                },
+                {
+                    "type": "bool"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getVoterLength",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "uint256"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "getVoterList",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "address[]"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "setCandidate",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "_address"
+                },
+                {
+                    "type": "string",
+                    "name": "_age"
+                },
+                {
+                    "type": "string",
+                    "name": "_name"
+                },
+                {
+                    "type": "string",
+                    "name": "_image"
+                },
+                {
+                    "type": "string",
+                    "name": "_ipfs"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "vote",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "_candidateAddress"
+                },
+                {
+                    "type": "uint256",
+                    "name": "_candidateVoteId"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "votedVoters",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "address"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "voterRight",
+            "constant": false,
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address",
+                    "name": "_address"
+                },
+                {
+                    "type": "string",
+                    "name": "_name"
+                },
+                {
+                    "type": "string",
+                    "name": "_image"
+                },
+                {
+                    "type": "string",
+                    "name": "_ipfs"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "type": "function",
+            "name": "voters",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "address"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "uint256",
+                    "name": "voterId"
+                },
+                {
+                    "type": "string",
+                    "name": "voter_name"
+                },
+                {
+                    "type": "string",
+                    "name": "voter_image"
+                },
+                {
+                    "type": "address",
+                    "name": "voter_address"
+                },
+                {
+                    "type": "uint256",
+                    "name": "voter_allowed"
+                },
+                {
+                    "type": "bool",
+                    "name": "voter_voted"
+                },
+                {
+                    "type": "uint256",
+                    "name": "voterVote"
+                },
+                {
+                    "type": "string",
+                    "name": "voter_ipfs"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "votersAddress",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [
+                {
+                    "type": "uint256"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "address"
+                }
+            ]
+        },
+        {
+            "type": "function",
+            "name": "votingOrganiser",
+            "constant": true,
+            "stateMutability": "view",
+            "payable": false,
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "address"
+                }
+            ]
+        }
+    ]
+}

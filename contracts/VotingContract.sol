@@ -168,7 +168,7 @@ contract Election{
             voters[_address].voter_ipfs,
             voters[_address].voter_allowed,
             voters[_address].voter_voted
-        );    
+        );
     }
 
 
