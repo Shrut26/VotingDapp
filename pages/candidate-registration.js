@@ -149,7 +149,7 @@ const candidateRegistration = () => {
       </div>
       {/* <image src={image} alt="ok" /> */}
       {/* {console.log(candidateForm)} */}
-      {fileUrl ? (
+      {/* {fileUrl ? (
         <div className={Style.createVoter}>
           <div className={Style.createdVoter_info}>
             <image src={fileUrl} alt="user profile" />
@@ -159,7 +159,7 @@ const candidateRegistration = () => {
         </div>
       ) : (
         <div></div>
-      )}
+      )} */}
     </div>
   );
 };
