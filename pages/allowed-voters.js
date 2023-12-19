@@ -17,6 +17,7 @@ const allowedVoters = () => {
     name: "",
     address: "",
     position: "",
+    pin: "",
   });
 
   const router = useRouter();
@@ -86,7 +87,7 @@ const allowedVoters = () => {
         )}
       </div> */}
       {/* commented out 49-87 */}
-      
+
       <div className={Style.voter}>
         <div className={Style.voter_container}>
           <h1>Create new voter</h1>
@@ -130,6 +131,14 @@ const allowedVoters = () => {
             placeholder="Voter Positions"
             handleClick={(e) =>
               setFormInput({ ...formInput, position: e.target.value })
+            }
+          />
+          <Input
+            inputType="text"
+            title="Pin"
+            placeholder="Enter PIN"
+            handleClick={(e) =>
+              setFormInput({ ...formInput, pin: e.target.value })
             }
           />
         </div>

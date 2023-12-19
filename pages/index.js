@@ -9,7 +9,6 @@ import Style from "../styles/index.module.css";
 import TimerProvider from "./timer";
 
 const index = () => {
-  
   const {
     getNewCandidate,
     candidateArray,
@@ -27,6 +26,7 @@ const index = () => {
     getAllVoterData();
     console.log("voter", voterLength);
     console.log("candidates", candidateArray);
+    console.log(currentAccount);
   }, []);
 
   // const [remainingTime, setRemainingTime] = useState(0);
@@ -57,23 +57,18 @@ const index = () => {
             </div>
           </div>
           {/* {console.log(remainingTime)} */}
-          {typeof remainingTime === 'undefined' ? 
-            (
+          {typeof remainingTime === "undefined" ? (
+            <div className={Style.winner_message}>
+              <small>Voting period Over, Now Displaying results...</small>
+            </div>
+          ) : (
             <div className={Style.winner_message}>
               <small>
-                Voting period Over, Now Displaying results...
+                <Countdown date={Date.now() + remainingTime} />
               </small>
             </div>
-            ) : 
-            (
-              <div className={Style.winner_message}>
-                <small>
-                  <Countdown date={Date.now() + remainingTime} />
-                </small>
-              </div>
-            )
-          }
-          </div>
+          )}
+        </div>
       )}
 
       <Card candidateArray={candidateArray} giveVote={giveVote} />
