@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useDropzone } from "react-dropzone";
 
 import { VotingContext } from "../context/Voters";
-import image from "../assets/image";
 import Style from "../styles/allowedVoters.module.css";
 import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";

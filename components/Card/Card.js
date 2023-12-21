@@ -9,8 +9,11 @@ const Card = ({ candidateArray, giveVote }) => {
   const remainingTime = TimerProvider();
   const [pin, setPin] = useState("");
   const [showTextBox, setShowTextBox] = useState(false);
+  const [selectedCandidateIndex, setSelectedCandidateIndex] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleVote = (id, address) => {
+  const handleVote = (id, address, index) => {
+    setSelectedCandidateIndex(index);
     setShowTextBox(true); // Show the text box
     // Call giveVote function passing id and address as arguments
     // giveVote(id, address, pin);
@@ -41,7 +44,7 @@ const Card = ({ candidateArray, giveVote }) => {
           )}
           {typeof remainingTime !== "undefined" && (
             <div className={Style.card_button}>
-              <button onClick={() => handleVote(el[2].toNumber(), el[6])}>
+              <button onClick={() => handleVote(el[2].toNumber(), el[6], i)}>
                 Vote
               </button>
               {/* <button
@@ -53,14 +56,18 @@ const Card = ({ candidateArray, giveVote }) => {
               </button> */}
             </div>
           )}
-          {showTextBox && (
+          {i === selectedCandidateIndex && showTextBox && (
             <div>
               <input
-                type="text"
+                type={showPassword ? "text" : "password"}
                 placeholder="Enter PIN"
                 value={pin}
                 onChange={(e) => setPin(e.target.value)}
               />
+              <button
+                onClick={() => setShowPassword(!showPassword)}
+              >
+              </button>
               <button
                 onClick={() =>
                   giveVote({ id: el[2].toNumber(), address: el[6], pin: pin })

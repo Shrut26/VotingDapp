@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import Countdown from "react-countdown";
-import Image from "next/image";
 
 import { VotingContext } from "../context/Voters";
 import Card from "../components/Card/Card";
@@ -29,16 +28,10 @@ const index = () => {
     console.log(currentAccount);
   }, []);
 
-  // const [remainingTime, setRemainingTime] = useState(0);
-
-  // useEffect(() => {
-  //   fetch('http://localhost:3001/remaining-time')
-  //     .then((response) => response.json())
-  //     .then((data) => setRemainingTime(data.remainingTime));
-  // }, []);
-
   const remainingTime = TimerProvider();
-  // console.log(remainingTime);
+  const handleCountdownComplete = () => {
+    window.location.reload();
+  };
 
   return (
     <div className={Style.home}>
@@ -64,7 +57,7 @@ const index = () => {
           ) : (
             <div className={Style.winner_message}>
               <small>
-                <Countdown date={Date.now() + remainingTime} />
+              <Countdown date={Date.now() + remainingTime} onComplete={handleCountdownComplete} />
               </small>
             </div>
           )}

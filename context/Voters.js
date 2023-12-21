@@ -8,73 +8,32 @@ import { VotingAddress, VotingAddressABI } from "./constants";
 import { uploadFileToIPFS, uploadJSONToIPFS } from "./pinata";
 import { GetIpfsUrlFromPinata } from "./utils";
 
-// import cv from "@techstark/opencv-js";
+function getUrlForAddress(address, array) {
+  const result = array
+    .map(innerArray => {
+      const innerAddress = innerArray[3].toLowerCase();
+      const innerUrl = innerArray[2];
+      return innerAddress === address ? innerUrl : null;
+    })
+    .filter(url => url !== null);
 
-// Define a function to load and process an image
-// function loadImageAndProcess(fileURL) {
-// Load the image from the fileURL and convert to grayscale
-//
-// console.log(fileURL);
-// let img = cv.imread(fileURL);
-// cv.imread(fileURL);
-// let gray_img = new cv.Mat();
-// cv.cvtColor(img, gray_img, cv.COLOR_BGR2GRAY);
+  return result.length > 0 ? result[0] : null;
+}
 
-// // Create a SIFT object and detect keypoints and descriptors
-// let sift = new cv.SIFT();
-// let kp_img = new cv.KeyPointVector();
-// let des_img = new cv.Mat();
-// sift.detectAndCompute(gray_img, new cv.Mat(), kp_img, des_img);
-
-// // Return the image, keypoints, and descriptors
-// return [img, kp_img, des_img];
-// }
-
-// Define a function to verify the face using SIFT features
-// function verifyFace(fileURL, threshold) {
-// Load and process the image from the fileURL
-// let cap = new cv.VideoCapture(0);
-// loadImageAndProcess(fileURL);
-// let [img, kp_img, des_img] = loadImageAndProcess(fileURL);
-// console.log(img);
-
-// // Open the camera and capture a frame
-// let cap = new cv.VideoCapture(0);
-// let frame = new cv.Mat();
-// cap.read(frame);
-
-// // Convert the frame to grayscale and detect keypoints and descriptors
-// let gray_frame = new cv.Mat();
-// cv.cvtColor(frame, gray_frame, cv.COLOR_BGR2GRAY);
-// let kp_frame = new cv.KeyPointVector();
-// let des_frame = new cv.Mat();
-// sift.detectAndCompute(gray_frame, new cv.Mat(), kp_frame, des_frame);
-
-// // Match the descriptors using Brute Force Matcher and sort by distance
-// let bf = new cv.BFMatcher(cv.NORM_L1, true);
-// let matches = new cv.DMatchVector();
-// bf.match(des_img, des_frame, matches);
-// matches.sort((a, b) => a.distance - b.distance);
-
-// // Draw the matched keypoints and display the result
-// let matching_result = new cv.Mat();
-// cv.drawMatches(img, kp_img, frame, kp_frame, matches, matching_result);
-// cv.imshow("Matching Result", matching_result);
-
-// // Calculate the ratio of matches to keypoints and compare with threshold
-// let ratio = matches.size() / kp_img.size();
-// if (ratio >= threshold) {
-//   console.log("Face verified");
-// } else {
-//   console.log("Face not verified");
-// }
-
-// // Release the camera and close the windows
-// cap.release();
-// cv.destroyAllWindows();
-// }
-
-// verifyFace("https://ipfs.io/ipfs/QmQCutTj8gCnHfQ64mBcRu1b2DAuxgKXYoUrgwmJPhXkvB", 0.7);
+function processImageComparisonResult(response) {
+  if (response) {
+    console.log("Received result from popup:", response);
+    if (response === "not matching") {
+      return 0;
+    }
+    else {
+      return 1;
+    }
+  } else {
+    console.error("Image comparison failed.");
+    return -1;
+  }
+}
 
 export const fetchContract = (signerOrProvider) =>
   new ethers.Contract(VotingAddress, VotingAddressABI, signerOrProvider);
@@ -229,8 +188,6 @@ export const VotingProvider = ({ children }) => {
         ipfsUrl
       );
       await candidate.wait();
-      // verifyFace(fileURL, 0.7);
-
       console.log(candidate);
       router.push("/");
     } catch (error) {
@@ -271,31 +228,43 @@ export const VotingProvider = ({ children }) => {
     }
   };
 
-  // useEffect(() => {
-  //   getNewCandidate();
-  // }, []);
-  //upload to ipfs voter image
   const giveVote = async (id) => {
     try {
+      localStorage.clear();
       const candidateAddress = id.address;
       const candidateId = id.id;
       const pin = id.pin;
-      console.log(id);
-      console.log(currentAccount);
+      const voterImgLink = getUrlForAddress(currentAccount.toLowerCase(), voterArray);
 
-      let result = await fetch(
+      localStorage.setItem("voterImgLink", voterImgLink); // Replace with actual link
+      console.log(localStorage.getItem("voterImgLink"));
+
+      const faceVerificationPromise = new Promise((resolve, reject) => {
+        window.open('http://localhost:3000/index.html', 'photoCaptureWindow');
+
+        // Polling for the resultMatch to be set in sessionStorage
+        const checkResultMatch = setInterval(() => {
+          const resultMatch = localStorage.getItem("resultMatch");
+          if (resultMatch !== null) {
+            const resFaceMatch = processImageComparisonResult(resultMatch);
+            console.log(resFaceMatch);
+            resolve(resFaceMatch === 1);
+            clearInterval(checkResultMatch);
+          }
+        }, 2000); // Check every second
+      });
+
+      const pinVerificationPromise = fetch(
         `http://localhost:3001/get-pin/${currentAccount}/${pin}`,
         {
           method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
-      );
+      ).then((result) => result.status === 200);
 
-      // result = result.json();
-      console.log(result.status);
-      if (result.status === 200) {
+      const [faceMatch, pinMatch] = await Promise.all([faceVerificationPromise, pinVerificationPromise]);
+
+      if (faceMatch && pinMatch) {
         const web3modal = new Web3Modal();
         const connection = await web3modal.connect();
         const provider = new ethers.providers.Web3Provider(connection);
@@ -304,10 +273,15 @@ export const VotingProvider = ({ children }) => {
         const voteredList = await contract.vote(candidateAddress, candidateId);
         console.log(voteredList);
       }
+      else {
+        // Handle verification failures
+        SetError("Face or PIN verification failed");
+      }
     } catch (error) {
       console.log(error);
       SetError("Error in giving vote");
     }
+    localStorage.clear();
   };
   return (
     <VotingContext.Provider
